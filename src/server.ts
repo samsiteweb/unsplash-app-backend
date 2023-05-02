@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import app from './app';
-import { normalizePort } from './utilities/port.utility';
+import { serverInstance, normalizePort } from './utilities';
 import variables from './variables';
-import { createServerInstance } from './utilities/server.utility';
+
 
 const port = normalizePort(variables.app.port);
 
-const server = createServerInstance(port, 'Ecommerce Platforms 1.0!', app);
+const server = serverInstance(port, "Sam's unsplash app!", app);
 
 export default server;

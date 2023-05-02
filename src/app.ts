@@ -3,8 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
-import { errorMiddleware } from './apis/middleware';
-import { v1Router } from '@src/apis/routes';
+import { errorMiddleware } from './apis/middlewares';
 import variables from './variables';
 
 const app = express();

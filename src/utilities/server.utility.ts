@@ -4,7 +4,7 @@ import { Express } from 'express';
 
 import { logger } from '@src/utilities';
 
-export const createServerInstance = (port: number, serverName: string, app: Express): Server => {
+ const createServerInstance = (port: number, serverName: string, app: Express): Server => {
   const debug = Debug(serverName);
   const server = createServer(app);
 
@@ -40,3 +40,5 @@ export const createServerInstance = (port: number, serverName: string, app: Expr
 
   return server;
 };
+
+export default createServerInstance
