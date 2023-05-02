@@ -5,7 +5,7 @@ export const addImageSchema = celebrate(
   {
     [Segments.BODY]: Joi.object().keys({
       imgUrl: Joi.string().required().trim(),
-      lable: Joi.string().required().trim()
+      label: Joi.string().required().trim()
     })
   },
   {

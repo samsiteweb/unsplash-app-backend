@@ -1,4 +1,4 @@
-import { BadRequestError } from "@src/errors";
+import { BadRequestError } from "@src/common/errors";
 import { ImageStore } from "./unsplash.interface";
 import { addImageRepo, deleteImageRepo, fetchImagesRepo, findImagesRepo } from "./unsplash.repository";
 

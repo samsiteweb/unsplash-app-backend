@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { isCelebrateError } from 'celebrate';
 
 import { respond, logger } from '@src/utilities';
-import ErrorHandler from '@src/errors/ErrorHandler';
+import ErrorHandler from '@src/common/errors/ErrorHandler';
 
 export default function handleErrors(err: Error, req: Request, res: Response, _next: NextFunction): Response {
   if (err instanceof ErrorHandler) {

@@ -24,8 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get('/', (req, res) =>
   res.json({
     status: 'success',
-    message: 'Ecommerce server response',
-    data: null
+    message: 'Server is up and running'
   })
 );
 
