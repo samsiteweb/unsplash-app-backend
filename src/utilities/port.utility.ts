@@ -1,4 +1,4 @@
-import { DEFAULT_PORT } from "../constants";
+import { DEFAULT_PORT } from "../common/constants";
 
 export const normalizePort = (val: string): number => {
   const port = parseInt(val, 10);

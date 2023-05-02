@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addImageSchema } from '../../schemas/imageStore.schema';
+import { addImageSchema } from './imageStore.schema';
 import unsplashController from './unsplash.controller';
 
 const unsplashRouter = Router();
