@@ -1,11 +1,11 @@
 
 import { Router } from 'express';
-// import roleRouter from '@src/apis/v1/rolesModule/role.routes';
+import unsplashRouter from '../v1/unsplash/unsplash.routes';
 
 
 const v1Router = Router();
 
-// v1Router.use('/store', storeRouter);
+v1Router.use('/store', unsplashRouter);
 
 
 export default v1Router;
