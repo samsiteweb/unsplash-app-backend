@@ -12,6 +12,12 @@ export const addImageRepo = async (data: Partial<ImageStore>): Promise<ImageStor
   });
   return newImage;
 };
+export const findImagesRepo = async (filters: any): Promise<ImageStore> => {
+  const image = await prisma.imageStore.findUnique({
+    where: { ...filters }
+  });
+  return image;
+};
 export const fetchImagesRepo = async (filters: any): Promise<ImageStore[]> => {
   const images = await prisma.imageStore.findMany({
     where: { ...filters }
