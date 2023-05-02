@@ -1,3 +1,4 @@
+import { BadRequestError } from '@src/common/errors';
 import { respond } from '@src/utilities';
 import { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -22,11 +23,15 @@ const unsplashController = {
       next(error);
     }
   },
-  deleteImages: (): RequestHandler => async (req, res, next) => {
+  deleteImage: (): RequestHandler => async (req, res, next) => {
     try {
-      const {imageId} = req.query.id as Record<string, string>;
+      const { id } = req.query as Record<string, string>;
+      const { password } = req.body
+      if (password !== "samsam"){
+        throw new BadRequestError("Invalid password provided")
+      }
       
-      const deleteImage = await deleteImageService(imageId)
+      await deleteImageService(id)
       respond(res, "Image deleted successfully", StatusCodes.OK);
     } catch (error) {
       next(error);

@@ -4,7 +4,7 @@ import { celebrate, Joi, Segments } from 'celebrate';
 export const addImageSchema = celebrate(
   {
     [Segments.BODY]: Joi.object().keys({
-      imgUrl: Joi.string().required().trim(),
+      image_url: Joi.string().required().trim(),
       label: Joi.string().required().trim()
     })
   },
@@ -16,8 +16,10 @@ export const addImageSchema = celebrate(
 export const deleteImageSchema = celebrate(
   {
     [Segments.BODY]: Joi.object().keys({
-      image_id: Joi.string().required().trim(),
-      passwords: Joi.string().required().trim()
+      password: Joi.string().required().trim()
+    }),
+    [Segments.QUERY]: Joi.object().keys({
+      id: Joi.string().required().trim()
     })
   },
   {
