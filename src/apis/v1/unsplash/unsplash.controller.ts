@@ -27,6 +27,7 @@ const unsplashController = {
       const {imageId} = req.query.id as Record<string, string>;
       
       const deleteImage = await deleteImageService(imageId)
+      respond(res, "Image deleted successfully", StatusCodes.OK);
     } catch (error) {
       next(error);
     }
