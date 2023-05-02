@@ -4,7 +4,9 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import { errorMiddleware } from './apis/middlewares';
+import { v1Router } from '@src/apis/routes';
 import variables from './variables';
+import { logger } from './utilities';
 
 const app = express();
 
