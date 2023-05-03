@@ -1,6 +1,6 @@
 import { BadRequestError } from "@src/common/errors";
 import { ImageStore } from "./unsplash.interface";
-import { addImageRepo, deleteImageRepo, fetchImagesRepo, findImagesRepo } from "./unsplash.repository";
+import { addImageRepo, deleteImageRepo, fetchImagesRepo, findImagesRepo, searchImagesByLabel } from "./unsplash.repository";
 
 
 
@@ -9,8 +9,15 @@ export const addImageService = async (data: Partial<ImageStore>): Promise<ImageS
     return newImage;
   };
   
-  export const fetchImageService = async (): Promise<ImageStore[]> => {
-    const images = await fetchImagesRepo({});
+  export const fetchImageService = async (page: number = 1, perPage: number = 10): Promise<ImageStore[]> => {
+    const skip = (page - 1) * perPage;
+    const take = perPage;
+    const images = await fetchImagesRepo({}, skip, take);
+    return images;
+  };
+
+  export const searchImageService = async (query:string): Promise<ImageStore[]> => {
+    const images = await searchImagesByLabel(query);
     return images;
   };
   

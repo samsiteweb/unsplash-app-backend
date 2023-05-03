@@ -3,7 +3,7 @@ import { respond } from '@src/utilities';
 import { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ImageStore } from './unsplash.interface';
-import { addImageService, deleteImageService, fetchImageService } from './unsplash.service';
+import { addImageService, deleteImageService, fetchImageService, searchImageService } from './unsplash.service';
 
 const unsplashController = {
   addImage: (): RequestHandler => async (req, res, next) => {
@@ -17,7 +17,18 @@ const unsplashController = {
   },
   fetchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const storedImages = await fetchImageService()
+      const page = Number(req.query.page) || 1;
+      const perPage = Number(req.query.perPage) || 10;
+      const storedImages = await fetchImageService(page, perPage);
+      respond(res, storedImages, StatusCodes.OK);
+    } catch (error) {
+      next(error);
+    }
+  },
+  searchImages: (): RequestHandler => async (req, res, next) => {
+    try {
+      const { queryString } = req.query as Record<string, string>;
+      const storedImages = await searchImageService(queryString)
       respond(res, storedImages, StatusCodes.OK);
     } catch (error) {
       next(error);
