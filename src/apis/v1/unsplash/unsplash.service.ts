@@ -9,10 +9,8 @@ export const addImageService = async (data: Partial<ImageStore>): Promise<ImageS
     return newImage;
   };
   
-  export const fetchImageService = async (page: number = 1, perPage: number = 10): Promise<ImageStore[]> => {
-    const skip = (page - 1) * perPage;
-    const take = perPage;
-    const images = await fetchImagesRepo({}, skip, take);
+  export const fetchImageService = async (): Promise<ImageStore[]> => {
+    const images = await fetchImagesRepo({});
     return images;
   };
 
@@ -22,10 +20,10 @@ export const addImageService = async (data: Partial<ImageStore>): Promise<ImageS
   };
   
   export const deleteImageService = async (id: string) => {
-    const cartItem = await findImagesRepo({ id });
-    if (!cartItem) {
-      throw new BadRequestError('Cart item not found');
+    const findImage = await findImagesRepo({ id });
+    if (!findImage) {
+      throw new BadRequestError('Image not found');
     }
-    const deletedCart = await deleteImageRepo({id});
-    return deletedCart;
+    const deletedImage = await deleteImageRepo({id});
+    return deletedImage;
   };

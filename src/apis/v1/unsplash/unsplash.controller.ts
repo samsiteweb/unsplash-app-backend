@@ -17,9 +17,7 @@ const unsplashController = {
   },
   fetchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const page = Number(req.query.page) || 1;
-      const perPage = Number(req.query.perPage) || 10;
-      const storedImages = await fetchImageService(page, perPage);
+      const storedImages = await fetchImageService();
       respond(res, storedImages, StatusCodes.OK);
     } catch (error) {
       next(error);

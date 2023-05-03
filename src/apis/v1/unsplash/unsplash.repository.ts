@@ -24,27 +24,20 @@ export const findImagesRepo = async (filters: any): Promise<ImageStore> => {
   });
   return image;
 };
-export const fetchImagesRepo = async (filters: any, skip: number, take: number): Promise<ImageStore[]> => {
+export const fetchImagesRepo = async (filters: any): Promise<ImageStore[]> => {
   const images = await prisma.imageStore.findMany({
     where: { ...filters },
     orderBy: {
       created_at: 'desc'
-    },
-    skip,
-    take
+    }
   });
   return images;
 };
 export const searchImagesByLabel = async (
-  query: string,
-  page: number = 1,
-  pageSize: number = 10
+  query: string
 ): Promise<ImageStore[]> => {
   if (!query) {
-    const images = await prisma.imageStore.findMany({
-      skip: (page - 1) * pageSize,
-      take: pageSize,
-    });
+    const images = await prisma.imageStore.findMany();
     return images;
   } else {
     const images = await prisma.imageStore.findMany({
@@ -53,9 +46,7 @@ export const searchImagesByLabel = async (
           contains: query,
           mode: 'insensitive',
         },
-      },
-      skip: (page - 1) * pageSize,
-      take: pageSize,
+      }
     });
     return images;
   }
