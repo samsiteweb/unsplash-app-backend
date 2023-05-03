@@ -8,10 +8,7 @@ const variables = {
   app: {
     port: process.env.PORT || "3210",
     environment,
-    isDev: environment === 'development',
-    isTesting: environment === 'test',
-    isProd: environment === 'production',
-    isStaging: environment === 'staging',
+    deletePassword: process.env.DEFAULT_PASSWORD,
     baseRouter: process.env.BASE_ROUTER
   },
 
@@ -19,15 +16,6 @@ const variables = {
     showAppLogs: process.env.SHOW_APPLICATION_LOGS === 'true',
     databaseLogs: process.env.SHOW_DATABASE_LOGS === 'true'
   },
-
-  db: {
-    host: process.env.DATABASE_HOST,
-    name: process.env.DATABASE_NAME,
-    user: process.env.DATABASE_USER,
-    port: process.env.DATABASE_PORT,
-    password: process.env.DATABASE_PASSWORD,
-    testDbName: process.env.TEST_DATABASE_NAME
-  }
 };
 
 export default variables;

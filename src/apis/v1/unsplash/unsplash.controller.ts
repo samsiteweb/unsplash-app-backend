@@ -1,5 +1,6 @@
 import { BadRequestError } from '@src/common/errors';
 import { respond } from '@src/utilities';
+import variables from '@src/variables';
 import { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ImageStore } from './unsplash.interface';
@@ -36,7 +37,7 @@ const unsplashController = {
     try {
       const { id } = req.query as Record<string, string>;
       const { password } = req.body
-      if (password !== "samsam"){
+      if (password !== variables.app.deletePassword){
         throw new BadRequestError("Invalid password provided")
       }
       
