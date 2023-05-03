@@ -8,6 +8,10 @@ const variables = {
   app: {
     port: process.env.PORT || "3210",
     environment,
+    isDev: environment === 'development',
+    isTesting: environment === 'test',
+    isProd: environment === 'production',
+    isStaging: environment === 'staging',
     deletePassword: process.env.DEFAULT_PASSWORD,
     baseRouter: process.env.BASE_ROUTER
   },
