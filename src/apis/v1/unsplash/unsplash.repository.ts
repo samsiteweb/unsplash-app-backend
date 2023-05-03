@@ -35,17 +35,30 @@ export const fetchImagesRepo = async (filters: any, skip: number, take: number):
   });
   return images;
 };
-export const searchImagesByLabel = async (query: string): Promise<ImageStore[]> => {
-  console.log(query)
-  const images = await prisma.imageStore.findMany({
-    where: {
-      label: {
-        contains: query,
-        mode: 'insensitive'
-      }
-    }
-  });
-  return images;
+export const searchImagesByLabel = async (
+  query: string,
+  page: number = 1,
+  pageSize: number = 10
+): Promise<ImageStore[]> => {
+  if (!query) {
+    const images = await prisma.imageStore.findMany({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+    return images;
+  } else {
+    const images = await prisma.imageStore.findMany({
+      where: {
+        label: {
+          contains: query,
+          mode: 'insensitive',
+        },
+      },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+    return images;
+  }
 };
 
 export const deleteImageRepo = async (filters: Partial<ImageStore>): Promise<ImageStore> => {

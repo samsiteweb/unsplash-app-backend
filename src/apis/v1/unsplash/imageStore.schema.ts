@@ -30,7 +30,7 @@ export const addImageSchema = celebrate(
 export const searchImageSchema = celebrate(
   {
     [Segments.QUERY]: Joi.object().keys({
-      queryString: Joi.string().required().trim()
+      queryString: Joi.string().required().trim().allow('')
     })
   },
   {
