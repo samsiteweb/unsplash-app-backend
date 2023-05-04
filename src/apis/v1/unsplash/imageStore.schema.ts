@@ -16,8 +16,8 @@ export const fetchImageSchema = celebrate(
 export const addImageSchema = celebrate(
   {
     [Segments.BODY]: Joi.object().keys({
-      image_url: Joi.string().required().trim(),
-      label: Joi.string().required().trim()
+      image_url: Joi.number(),
+      label: Joi.number(),
     })
   },
   {
@@ -30,7 +30,9 @@ export const addImageSchema = celebrate(
 export const searchImageSchema = celebrate(
   {
     [Segments.QUERY]: Joi.object().keys({
-      queryString: Joi.string().required().trim().allow('')
+      queryString: Joi.string().required().trim().allow(''),
+      page: Joi.string().required().trim().allow(''),
+      perPage: Joi.string().required().trim().allow('')
     })
   },
   {
