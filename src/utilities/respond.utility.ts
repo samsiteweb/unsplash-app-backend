@@ -4,22 +4,25 @@ import { StatusCodes } from 'http-status-codes';
 interface PaginatedResponse<T> {
   data: T[];
   meta: {
-    limit: number;
+    nextPage: number;
+    perPage: number;
     count: number;
     hasNext: boolean;
   };
 }
 
-export const generatePaginationMeta = <T>(payload: T[], limit: number): PaginatedResponse<T> => {
-  const hasNext = payload.length > limit;
+export const generatePaginationMeta = <T>(payload: T[], page: number, perPage: number): PaginatedResponse<T> => {
+  const hasNext = payload.length > perPage;
   const data = hasNext ? payload.slice(0, -1) : payload;
+  const nextPage = hasNext ? page + 1 : null;
 
   return {
     data,
     meta: {
-      limit,
+      nextPage: nextPage,
+      perPage,
       hasNext,
-      count: hasNext ? limit : payload.length
+      count: hasNext ? perPage : payload.length
     }
   };
 };

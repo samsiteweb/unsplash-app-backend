@@ -31,7 +31,7 @@ export const fetchImagesRepo = async (filters: any, page: number, perPage: numbe
     where: { ...filters },
     orderBy: { created_at: 'desc' },
     skip,
-    take: perPage,
+    take: perPage + 1,
   });
   return images;
 };
@@ -50,7 +50,7 @@ export const searchImagesByLabel = async (query: string, page: number, perPage: 
         },
       },
       skip,
-      take: perPage
+      take: perPage + 1
     });
     return images;
   }

@@ -1,5 +1,5 @@
 import { BadRequestError } from '@src/common/errors';
-import { respond } from '@src/utilities';
+import { generatePaginationMeta, respond } from '@src/utilities';
 import variables from '@src/variables';
 import { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -19,9 +19,13 @@ const unsplashController = {
 
   fetchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const { page, perPage } = req.query as Record<string, string>;
-      const images = await fetchImageService(page ? parseInt(page) : 1, perPage ? parseInt(perPage) : 10);
-      respond(res, images, StatusCodes.OK);
+      const query = req.query as Record<string, string>;
+      const page = query.page ? parseInt(query.page) : 1;
+      const perPage = query.perPage ? parseInt(query.perPage) : 10
+
+      const images = await fetchImageService(page, perPage);
+      const response = generatePaginationMeta(images, page, perPage)
+      respond(res, response.data, StatusCodes.OK, null, response.meta);
     } catch (error) {
       next(error);
     }
@@ -29,9 +33,15 @@ const unsplashController = {
 
   searchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const { queryString, page, perPage } = req.query as Record<string, string>;
-      const images = await searchImageService(queryString, page ? parseInt(page) : 1, perPage ? parseInt(perPage) : 10);
-      respond(res, images, StatusCodes.OK);
+      const query = req.query as Record<string, string>;
+
+      const page = query.page ? parseInt(query.page) : 1;
+      const perPage = query.perPage ? parseInt(query.perPage) : 10
+
+      const images = await searchImageService(query.queryString, page, perPage);
+      const response = generatePaginationMeta(images, page, perPage)
+      
+      respond(res, response.data,  StatusCodes.OK, null, response.meta);
     } catch (error) {
       next(error);
     }
