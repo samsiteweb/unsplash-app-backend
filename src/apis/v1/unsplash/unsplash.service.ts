@@ -9,13 +9,13 @@ export const addImageService = async (data: Partial<ImageStore>): Promise<ImageS
     return newImage;
   };
   
-  export const fetchImageService = async (): Promise<ImageStore[]> => {
-    const images = await fetchImagesRepo({});
+  export const fetchImageService = async (page: number, perPage: number): Promise<ImageStore[]> => {
+    const images = await fetchImagesRepo({}, page, perPage);
     return images;
   };
 
-  export const searchImageService = async (query:string): Promise<ImageStore[]> => {
-    const images = await searchImagesByLabel(query);
+  export const searchImageService = async (query:string, page: number, perPage: number ): Promise<ImageStore[]> => {
+    const images = await searchImagesByLabel(query, page, perPage);
     return images;
   };
   

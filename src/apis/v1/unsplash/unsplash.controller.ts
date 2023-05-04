@@ -16,31 +16,35 @@ const unsplashController = {
       next(error);
     }
   },
+
   fetchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const storedImages = await fetchImageService();
-      respond(res, storedImages, StatusCodes.OK);
+      const { page, perPage } = req.query as Record<string, string>;
+      const images = await fetchImageService(page ? parseInt(page) : 1, perPage ? parseInt(perPage) : 10);
+      respond(res, images, StatusCodes.OK);
     } catch (error) {
       next(error);
     }
   },
+
   searchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const { queryString } = req.query as Record<string, string>;
-      const storedImages = await searchImageService(queryString)
-      respond(res, storedImages, StatusCodes.OK);
+      const { queryString, page, perPage } = req.query as Record<string, string>;
+      const images = await searchImageService(queryString, page ? parseInt(page) : 1, perPage ? parseInt(perPage) : 10);
+      respond(res, images, StatusCodes.OK);
     } catch (error) {
       next(error);
     }
   },
+
   deleteImage: (): RequestHandler => async (req, res, next) => {
     try {
       const { id } = req.query as Record<string, string>;
       const { password } = req.body
-      if (password !== variables.app.deletePassword){
+      if (password !== variables.app.deletePassword) {
         throw new BadRequestError("Invalid password provided")
       }
-      
+
       await deleteImageService(id)
       respond(res, "Image deleted successfully", StatusCodes.OK);
     } catch (error) {

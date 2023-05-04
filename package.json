@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "backend for unsplash app",
   "main": "server.js",
-
   "engines": {
     "node": "14.x"
   },
@@ -24,7 +23,6 @@
   ],
   "author": "Lawal Samuel Olamide",
   "license": "MIT",
-
   "dependencies": {
     "@joi/date": "^2.1.0",
     "@prisma/client": "^4.2.1",
