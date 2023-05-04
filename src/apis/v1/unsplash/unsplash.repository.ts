@@ -25,19 +25,15 @@ export const findImagesRepo = async (filters: any): Promise<ImageStore> => {
   return image;
 };
 
-export const fetchImagesRepo = async (filters: any, page: number, perPage: number): Promise<ImageStore[]> => {
-  const skip = (page - 1) * perPage;
+export const fetchImagesRepo = async (filters?: any): Promise<ImageStore[]> => {
   const images = await prisma.imageStore.findMany({
     where: { ...filters },
-    orderBy: { created_at: 'desc' },
-    skip,
-    take: perPage + 1,
+    orderBy: { created_at: 'desc' }
   });
   return images;
 };
 
-export const searchImagesByLabel = async (query: string, page: number, perPage: number): Promise<ImageStore[]> => {
-  const skip = (page - 1) * perPage;
+export const searchImagesByLabel = async (query: string): Promise<ImageStore[]> => {
   if (!query) {
     const images = await prisma.imageStore.findMany();
     return images;
@@ -48,9 +44,7 @@ export const searchImagesByLabel = async (query: string, page: number, perPage: 
           contains: query,
           mode: 'insensitive',
         },
-      },
-      skip,
-      take: perPage + 1
+      }
     });
     return images;
   }

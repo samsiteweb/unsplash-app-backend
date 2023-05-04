@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 interface PaginatedResponse<T> {
   data: T[];
   meta: {
+    page: number;
     nextPage: number;
     perPage: number;
     count: number;
@@ -19,6 +20,7 @@ export const generatePaginationMeta = <T>(payload: T[], page: number, perPage: n
   return {
     data,
     meta: {
+      page,
       nextPage: nextPage,
       perPage,
       hasNext,

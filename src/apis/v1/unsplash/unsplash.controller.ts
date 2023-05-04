@@ -19,13 +19,8 @@ const unsplashController = {
 
   fetchImages: (): RequestHandler => async (req, res, next) => {
     try {
-      const query = req.query as Record<string, string>;
-      const page = query.page ? parseInt(query.page) : 1;
-      const perPage = query.perPage ? parseInt(query.perPage) : 10
-
-      const images = await fetchImageService(page, perPage);
-      const response = generatePaginationMeta(images, page, perPage)
-      respond(res, response.data, StatusCodes.OK, null, response.meta);
+      const images = await fetchImageService();
+      respond(res, images, StatusCodes.OK, null);
     } catch (error) {
       next(error);
     }
@@ -40,7 +35,7 @@ const unsplashController = {
 
       const images = await searchImageService(query.queryString, page, perPage);
       const response = generatePaginationMeta(images, page, perPage)
-      
+
       respond(res, response.data,  StatusCodes.OK, null, response.meta);
     } catch (error) {
       next(error);
