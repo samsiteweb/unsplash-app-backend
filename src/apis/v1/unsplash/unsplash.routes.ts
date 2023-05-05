@@ -6,7 +6,7 @@ const unsplashRouter = Router();
 
 unsplashRouter.get('/', unsplashController.fetchImages());
 unsplashRouter.post('/', addImageSchema, unsplashController.addImage());
-unsplashRouter.post('/search', searchImageSchema, unsplashController.searchImages());
-unsplashRouter.delete('/', deleteImageSchema, unsplashController.deleteImage())
+unsplashRouter.get('/search', searchImageSchema, unsplashController.searchImages());
+unsplashRouter.delete('/:id', deleteImageSchema, unsplashController.deleteImage())
 
 export default unsplashRouter;

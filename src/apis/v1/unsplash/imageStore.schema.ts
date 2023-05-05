@@ -32,7 +32,7 @@ export const deleteImageSchema = celebrate(
     [Segments.BODY]: Joi.object().keys({
       password: Joi.string().required().trim()
     }),
-    [Segments.QUERY]: Joi.object().keys({
+    [Segments.PARAMS]: Joi.object().keys({
       id: Joi.string().required().trim()
     })
   },
