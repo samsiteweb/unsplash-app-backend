@@ -1,6 +1,7 @@
-import app from "@src/app";
+
 import request from "supertest";
 import crypto from "crypto";
+import app from "../../src/app";
 
 
 const generateRandomText = (length: number) => {
@@ -11,6 +12,16 @@ describe("Test unsplash api suite", () => {
   let createdImageId: string;
   const label: string = generateRandomText(10)
   const image_url = "https://images.pexels.com/photos/5956834/pexels-photo-5956834.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+  
+  let server: any;
+
+  beforeAll(() => {
+    server = app.listen(3002);
+  });
+
+  afterAll((done) => {
+    server.close(done);
+  });
   
   test("should create a new image", async () => {
     const res = await request(app)
@@ -60,4 +71,5 @@ describe("Test unsplash api suite", () => {
     expect(res.body.status).toBe("success");
     expect(res.body.data).toBe("Image deleted successfully")
   });
+  
 });

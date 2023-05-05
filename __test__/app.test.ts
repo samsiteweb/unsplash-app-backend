@@ -1,6 +1,6 @@
+import app from "../src/app";
 import request from "supertest";
 
-import app from "../src/app";
 
 describe("Test app.ts", () => {
   test("Catch-all route", async () => {

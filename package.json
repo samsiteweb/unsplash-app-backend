@@ -8,13 +8,12 @@
   },
   "scripts": {
     "test": "jest --verbose",
-    "dev": "ts-node-dev -r tsconfig-paths/register -r ts-node-dev --respawn ./src/server.ts",
-    "start:dev": "npm run test && ts-node-dev -r tsconfig-paths/register -r ts-node-dev --respawn ./src/server.ts",
+    "start:dev": "ts-node-dev -r tsconfig-paths/register -r ts-node-dev --respawn ./src/server.ts",
     "prettier": "prettier \"**/*.+(ts|js|json)\"",
     "format": "npm run prettier -- --write",
     "db:prepare": "prisma format && prisma generate",
     "db:migrate": " npm run db:prepare && prisma migrate dev",
-    "start": "npm run db:prepare && node dist/src/server.js",
+    "start": "npm run test && npm run db:prepare && node dist/src/server.js",
     "prebuild": "rm -rf dist/*",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
     "typeorm": "typeorm-ts-node-commonjs"
