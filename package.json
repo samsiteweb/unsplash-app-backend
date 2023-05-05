@@ -13,7 +13,7 @@
     "format": "npm run prettier -- --write",
     "db:prepare": "prisma format && prisma generate",
     "db:migrate": " npm run db:prepare && prisma migrate dev",
-    "start": "npm run test && npm run db:prepare && node dist/src/server.js",
+    "start": "npm run db:prepare && node dist/src/server.js",
     "prebuild": "rm -rf dist/*",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
     "typeorm": "typeorm-ts-node-commonjs"
