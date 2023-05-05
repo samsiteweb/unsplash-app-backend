@@ -44,7 +44,7 @@ const unsplashController = {
 
   deleteImage: (): RequestHandler => async (req, res, next) => {
     try {
-      const { id } = req.query as Record<string, string>;
+      const { id } = req.params as Record<string, string>;
       const { password } = req.body
       if (password !== variables.app.deletePassword) {
         throw new BadRequestError("Invalid password provided")
